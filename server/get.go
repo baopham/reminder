@@ -1,16 +1,20 @@
 package server
 
 import (
-	"github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 	"github.com/baopham/reminder/db"
 	context "golang.org/x/net/context"
 )
 
-func (s ReminderServer) Get(ctx context.Context, r *reminder.GetRequest) (*reminder.ReminderResponse, error) {
+func (s ReminderServer) Get(ctx context.Context, r *pb.GetRequest) (*pb.GetResponse, error) {
 	session, err := db.NewSession()
 	if err != nil {
 		return nil, err
 	}
 	defer session.Close()
-	return db.FindReminder(r.Id, session)
+	reminder, err := db.FindReminder(r.Id, session)
+	if err != nil {
+		return nil, err
+	}
+	return &pb.GetResponse{Reminder: reminder}, nil
 }

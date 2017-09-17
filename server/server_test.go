@@ -6,16 +6,16 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 	"github.com/lileio/lile"
 )
 
 var s = ReminderServer{}
-var cli reminder.ReminderClient
+var cli pb.ReminderClient
 
 func TestMain(m *testing.M) {
 	impl := func(g *grpc.Server) {
-		reminder.RegisterReminderServer(g, s)
+		pb.RegisterReminderServer(g, s)
 	}
 
 	gs := grpc.NewServer()
@@ -24,7 +24,7 @@ func TestMain(m *testing.M) {
 	addr, serve := lile.NewTestServer(gs)
 	go serve()
 
-	cli = reminder.NewReminderClient(lile.TestConn(addr))
+	cli = pb.NewReminderClient(lile.TestConn(addr))
 
 	os.Exit(m.Run())
 }

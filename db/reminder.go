@@ -1,17 +1,17 @@
 package db
 
 import (
-	pb "github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
 	"log"
 )
 
-func FindReminder(id string, s *mgo.Session) (*pb.ReminderResponse, error) {
+func FindReminder(id string, s *mgo.Session) (*pb.Reminder, error) {
 	session, c := reminderDB(s)
 	defer session.Close()
 
-	var reminder pb.ReminderResponse
+	var reminder pb.Reminder
 
 	err := c.FindId(bson.ObjectIdHex(id)).One(&reminder)
 

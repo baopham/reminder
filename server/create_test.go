@@ -3,14 +3,14 @@ package server
 import (
 	"testing"
 
-	"github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 	"github.com/stretchr/testify/assert"
 	context "golang.org/x/net/context"
 )
 
 func TestCreate(t *testing.T) {
 	ctx := context.Background()
-	req := &reminder.CreateRequest{}
+	req := &pb.CreateRequest{}
 
 	res, err := cli.Create(ctx, req)
 	assert.Nil(t, err)

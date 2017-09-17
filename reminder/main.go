@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 	"github.com/baopham/reminder/reminder/cmd"
 	"github.com/baopham/reminder/server"
 	"github.com/lileio/lile"
@@ -15,7 +15,7 @@ func main() {
 
 	lile.Name("reminder")
 	lile.Server(func(g *grpc.Server) {
-		reminder.RegisterReminderServer(g, s)
+		pb.RegisterReminderServiceServer(g, s)
 	})
 
 	service := lile.GlobalService()

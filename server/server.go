@@ -1,9 +1,9 @@
 package server
 
 import (
-	"github.com/baopham/reminder"
+	pb "github.com/baopham/goproto/reminder"
 )
 
 type ReminderServer struct {
-	reminder.ReminderServer
+	pb.ReminderServiceServer
 }
